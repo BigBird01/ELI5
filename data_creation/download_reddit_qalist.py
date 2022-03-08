@@ -138,6 +138,8 @@ def main():
                         help= 'only download submissions')
     parser.add_argument('-A', '--answers_only', action='store_true',
                         help= 'only download comments')
+    parser.add_argument('--output_dir', type=str, default='processed_data',
+                        help= 'Output directory')
     args        = parser.parse_args()
     ### collect submissions and comments monthly URLs
     date_to_url_submissions = gather_dump_urls(REDDIT_URL,
@@ -151,7 +153,7 @@ def main():
     subprocess.run(['mkdir', 'reddit_tmp'], stdout=subprocess.PIPE)
     st_time    = time()
     subreddit_names = json.loads(args.subreddit_list)
-    output_files    = dict([(name, "processed_data/%s_qalist.json" % (name,))
+    output_files    = dict([(name, f"{args.output_dir}/{name}_qalist.json")
                             for name in subreddit_names])
     qa_dict         = dict([(name, {}) for name in subreddit_names])
     for name, fname in output_files.items():
