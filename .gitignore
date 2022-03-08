@@ -1,0 +1,4 @@
+*.pyc
+*/pre_computed/*ccrawl_ids.json
+.git
+.github
