@@ -1,7 +1,7 @@
 #!/bin/bash
 SCRIPT=$(readlink -f "$0")
 SCRIPT_DIR=$(dirname "$SCRIPT")
-cd SCRIPT_DIR
+cd $SCRIPT_DIR
 year=$1
 
 pip install -r requirements.txt

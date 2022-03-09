@@ -29,6 +29,8 @@ def main():
                         help='how often are results written to file')
     parser.add_argument('-o', '--output_dir', default='processed_data/collected_docs', type=str,
                         help='where to save the output')
+    parser.add_argument('--pre_computed_dir', default='pre_computed', type=str,
+                        help='where to load pre_computed')
     args    = parser.parse_args()
     # parse full list of wet urls
     # slice urls for WET files can be found at https://commoncrawl.org/2018/08/august-2018-crawl-archive-now-available/
@@ -43,7 +45,7 @@ def main():
     sr_names        = json.loads(args.subreddit_names)
     for name in sr_names:
         print(name)
-        ccrawl_ids_maps[name]   = json.load(open('pre_computed/%s_ccrawl_ids.json' % (name,)))
+        ccrawl_ids_maps[name]   = json.load(open(f'{args.pre_computed_dir}/{name}_ccrawl_ids.json'))
         for i, (k, _) in enumerate(ccrawl_ids_maps[name]):
             reddit_id_group[k]  = (i * 10) // len(ccrawl_ids_maps[name])
     # make a list of the CommonCrawl UIDs we want to process and keep
